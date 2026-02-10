@@ -9,4 +9,7 @@ COPY mcp/travily mcp/travily
 
 ENV TRAVLY_KEY=""
 
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD node -e "process.exit(process.env.TRAVLY_KEY ? 0 : 1)"
+
 CMD ["node", "mcp/travily/server.js"]
